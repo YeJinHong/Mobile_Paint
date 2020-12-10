@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/colortitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pick Line Color"
+        android:textColor="#00BCD4"
+        android:textSize="30dp" />
+
+    <View
+        android:id="@+id/bottomline"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#00BCD4"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/black"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:tag="#000000"
+            android:background="#000000"/>
+
+        <View
+            android:id="@+id/blue"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:tag="#0000ff"
+            android:background="#0000ff"/>
+
+        <View
+            android:id="@+id/mint"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:tag="#00ffff"
+            android:background="#00ffff"/>
+
+        <View
+            android:id="@+id/grey"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:tag="#777777"
+            android:background="#777777" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/green"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:tag="#37FF00"
+            android:background="#37FF00" />
+
+        <View
+            android:id="@+id/pink"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:tag="#FF00E5"
+            android:background="#FF00E5" />
+
+        <View
+            android:id="@+id/red"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:tag="#FF0000"
+            android:background="#FF0000" />
+
+        <View
+            android:id="@+id/yellow"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:tag="#FFF200"
+            android:background="#FFF200" />
+
+    </LinearLayout>
+</LinearLayout>
