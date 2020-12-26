@@ -14,13 +14,13 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/optionEmboss"
+        android:id="@+id/menu_emboss"
         android:icon="@drawable/ic_launcher_background"
         android:checkable="true"
         android:title="Emboss"
         app:showAsAction="never" />
     <item
-        android:id="@+id/optionBlur"
+        android:id="@+id/menu_blur"
         android:icon="@drawable/ic_launcher_background"
         android:checkable="true"
         android:title="Blur"

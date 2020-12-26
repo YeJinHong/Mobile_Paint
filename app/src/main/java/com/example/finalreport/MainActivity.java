@@ -3,120 +3,142 @@ package com.example.finalreport;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.EmbossMaskFilter;
+import android.graphics.MaskFilter;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.RectF;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    int linewidth = 2;
-    int color = 0;
+
+    private PaintView mView;
+    private boolean mIsEmboss;
+    private boolean mIsBlur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mView = (PaintView)findViewById(R.id.PaintView);
+        ((Button)findViewById(mView.mGetType())).setTextColor(Color.RED);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.mymenu, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.menu_emboss).setChecked(mIsEmboss);
+        menu.findItem(R.id.menu_blur).setChecked(mIsBlur);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    // menu 버튼 기능 구현
+    @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        // 임시 메소드
         switch(item.getItemId()){
             case R.id.PickLineWidth:
-                showLineWidth();
+                new LinePickerDialog(this, android.R.style.Theme_Holo_Light_Dialog).show();
                 return true;
             case R.id.PickColor:
-                showColors();
+                new ColorPickerDialog(this, android.R.style.Theme_Holo_Light_Dialog).show();
                 return true;
+            case R.id.menu_emboss:
+                mIsEmboss = !mIsEmboss;
+                if (mIsEmboss) mIsBlur = false;
+                mView.mSetFilter(mIsEmboss, mIsBlur);
+                break;
+            case R.id.menu_blur:
+                mIsBlur = !mIsBlur;
+                if (mIsBlur) mIsEmboss = false;
+                mView.mSetFilter(mIsEmboss, mIsBlur);
+                break;
             default:
-                Toast.makeText(this, "Other", Toast.LENGTH_SHORT).show();
-                return true;
+                return super.onOptionsItemSelected(item);
         }
+        Button btnEmboss = (Button)findViewById(R.id.btnEmboss);
+        Button btnBlur = (Button)findViewById(R.id.btnBlur);
+        btnEmboss.setTextColor(mIsEmboss ? Color.RED : Color.BLACK);
+        btnBlur.setTextColor(mIsBlur ? Color.RED : Color.BLACK);
+        return true;
     }
 
     //0-1 Width
-    public void showLineWidth(){
-        final Dialog widthDialog = new Dialog(this);
-        widthDialog.setContentView(R.layout.width_dialog);
-        widthDialog.setTitle("Pick Line Width");
-
-        final View width2 = widthDialog.findViewById(R.id.view2);
-        final View width6 = widthDialog.findViewById(R.id.view6);
-        final View width10 = widthDialog.findViewById(R.id.view10);
-        final View width14 = widthDialog.findViewById(R.id.view14);
-
-        // linewidth라는 변수에 길이 저장. 이를 바탕으로 펜 두께 조절. 차후 수정.
-        width2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                linewidth = width2.getHeight();
-                widthDialog.dismiss();
-            }
-        });
-        widthDialog.show();
-
+    public void mSetLineWidth(int width){
+        mView.mSetLineWidth(width);
     }
 
-    //0-2 Color
-    public void showColors(){
-        final Dialog colorDialog = new Dialog(this);
-        final PaintView paintView = findViewById(R.id.PaintView);
-
-        colorDialog.setContentView(R.layout.color_dialog);
-        colorDialog.setTitle("Pick Line Color");
-        View blue = colorDialog.findViewById(R.id.blue);
-
-        // 전체 색에 대해 처리가 안되어있음.
-        blue.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                paintView.setColor(v.getTag().toString());
-                colorDialog.dismiss();
-            }
-        });
-        colorDialog.show();
-
+    public void mSetLineColor(int color){
+        mView.mSetLineColor(color);
     }
 
-    //1-1. Line
-    public void onClick_Mode(View v){
-
+    public void mOnClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnLine:
+            case R.id.btnRect:
+            case R.id.btnCirc:
+            case R.id.btnCurve:
+            case R.id.btnErase:
+                ((Button) findViewById(R.id.btnLine)).setTextColor(Color.BLACK);
+                ((Button) findViewById(R.id.btnRect)).setTextColor(Color.BLACK);
+                ((Button) findViewById(R.id.btnCirc)).setTextColor(Color.BLACK);
+                ((Button) findViewById(R.id.btnCurve)).setTextColor(Color.BLACK);
+                ((Button) findViewById(R.id.btnErase)).setTextColor(Color.BLACK);
+                ((Button) v).setTextColor(Color.RED);
+                mView.mSetType(v.getId());
+                return;
+            case R.id.btnClear:
+                new AlertDialog.Builder(this).setTitle("Do you want to clear?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mView.mSetClear();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .show();
+                return;
+            case R.id.btnEmboss:
+                mIsEmboss = !mIsEmboss;
+                if (mIsEmboss) mIsBlur = false;
+                mView.mSetFilter(mIsEmboss, mIsBlur);
+                break;
+            case R.id.btnBlur:
+                mIsBlur = !mIsBlur;
+                if (mIsBlur) mIsEmboss = false;
+                mView.mSetFilter(mIsEmboss, mIsBlur);
+                break;
+        }
+        Button btnEmboss = (Button) findViewById(R.id.btnEmboss);
+        Button btnBlur = (Button) findViewById(R.id.btnBlur);
+        btnEmboss.setTextColor(mIsEmboss ? Color.RED : Color.BLACK);
+        btnBlur.setTextColor(mIsBlur ? Color.RED : Color.BLACK);
     }
 
-    //2-2. Clear
-    public void onClick_Clear(View v){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage("Do you want to clear?");
-        alertDialogBuilder.setNegativeButton("No",
-            new DialogInterface.OnClickListener(){
-                @Override
-                public void onClick(DialogInterface arg0, int arg1){
-                    finish();
-                }
-            });
-
-        alertDialogBuilder.setPositiveButton("Yes",
-                new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1){
-                        final PaintView paintView = findViewById(R.id.PaintView);
-                        paintView.clear();
-                    }
-                });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+    public int mGetLineColor(){
+        return mView.mGetLineColor();
     }
-
 
 }

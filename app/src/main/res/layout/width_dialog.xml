@@ -6,30 +6,17 @@
     android:orientation="vertical"
     android:padding="20dp">
 
-    <TextView
-        android:id="@+id/widthtitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pick Line Width"
-        android:textColor="#00BCD4"
-        android:textSize="30dp" />
-
-    <View
-        android:id="@+id/bottomline"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#00BCD4"/>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="30dp">
 
         <View
-            android:id="@+id/view2"
+            android:id="@+id/width2"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_gravity="center_vertical"
-            android:background="#000000"/>
+            android:background="#000000"
+            android:tag = "2"/>
     </FrameLayout>
 
     <FrameLayout
@@ -37,10 +24,11 @@
         android:layout_height="30dp">
 
         <View
-            android:id="@+id/view6"
+            android:id="@+id/width6"
             android:layout_width="match_parent"
             android:layout_height="6dp"
-            android:background="#000000"/>
+            android:background="#000000"
+            android:tag = "6"/>
     </FrameLayout>
 
     <FrameLayout
@@ -48,11 +36,12 @@
         android:layout_height="30dp">
 
         <View
-            android:id="@+id/view10"
+            android:id="@+id/width10"
             android:layout_width="wrap_content"
             android:layout_height="10dp"
             android:layout_gravity="center_vertical"
-            android:background="#000000" />
+            android:background="#000000"
+            android:tag = "10"/>
     </FrameLayout>
 
     <FrameLayout
@@ -60,10 +49,32 @@
         android:layout_height="30dp">
 
         <View
-            android:id="@+id/view14"
+            android:id="@+id/width14"
             android:layout_width="wrap_content"
             android:layout_height="14dp"
             android:layout_gravity="center_vertical"
-            android:background="#000000" />
+            android:background="#000000"
+            android:tag = "14"/>
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="current width:4dp"
+        />
+
+    <SeekBar
+        android:id="@+id/seekBar1"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:max="100"
+        android:progress="10" />
+
+    <Button
+        android:id="@+id/selectBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="select" />
+
 </LinearLayout>

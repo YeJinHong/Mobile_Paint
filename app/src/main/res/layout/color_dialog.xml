@@ -3,21 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/colortitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pick Line Color"
-        android:textColor="#00BCD4"
-        android:textSize="30dp" />
-
-    <View
-        android:id="@+id/bottomline"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#00BCD4"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,7 +29,7 @@
             android:background="#0000ff"/>
 
         <View
-            android:id="@+id/mint"
+            android:id="@+id/cyan"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_weight="1"
@@ -49,7 +37,7 @@
             android:background="#00ffff"/>
 
         <View
-            android:id="@+id/grey"
+            android:id="@+id/gray"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_weight="1"
@@ -60,7 +48,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <View
@@ -68,32 +56,38 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:tag="#37FF00"
-            android:background="#37FF00" />
+            android:background="#37FF00"
+            android:tag="#37FF00" />
 
         <View
-            android:id="@+id/pink"
+            android:id="@+id/magenta"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:tag="#FF00E5"
-            android:background="#FF00E5" />
+            android:background="#FF00E5"
+            android:tag="#FF00E5" />
 
         <View
             android:id="@+id/red"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:tag="#FF0000"
-            android:background="#FF0000" />
+            android:background="#FF0000"
+            android:tag="#FF0000" />
 
         <View
             android:id="@+id/yellow"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:tag="#FFF200"
-            android:background="#FFF200" />
+            android:background="#FFF200"
+            android:tag="#FFF200" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/rgbBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="other" />
 </LinearLayout>

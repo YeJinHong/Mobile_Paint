@@ -15,28 +15,32 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Line" />
+            android:text="Line"
+            android:onClick="mOnClick"/>
 
         <Button
             android:id="@+id/btnRect"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Rect" />
+            android:text="Rect"
+            android:onClick="mOnClick" />
 
         <Button
             android:id="@+id/btnCirc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Circ" />
+            android:text="Circ"
+            android:onClick="mOnClick" />
 
         <Button
             android:id="@+id/btnCurve"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Curve" />
+            android:text="Curve"
+            android:onClick="mOnClick" />
     </LinearLayout>
 
     <LinearLayout
@@ -49,29 +53,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Erase" />
+            android:text="Erase"
+            android:onClick="mOnClick" />
 
         <Button
             android:id="@+id/btnClear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="onClick_Clear"
-            android:text="Clear" />
+            android:text="Clear"
+            android:onClick="mOnClick" />
 
         <Button
             android:id="@+id/btnEmboss"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Emboss" />
+            android:text="Emboss"
+            android:onClick="mOnClick" />
 
         <Button
             android:id="@+id/btnBlur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Blur" />
+            android:text="Blur"
+            android:onClick="mOnClick" />
 
     </LinearLayout>
 
